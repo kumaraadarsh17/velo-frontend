@@ -27,6 +27,7 @@
             <br><br>
             <button type="submit" class="button" id="log-btn">Log in</button>
             <br><br>
+            <button type="submit" class="button" id="register-btn">Register</button>
             <!-- <input type="checkbox" id="check">
             <span>Remember me</span>
             <br><br>
@@ -38,6 +39,11 @@
         if (localStorage.getItem('token') != null) {
             window.location.href = './main page/index.html';
         }
+
+        document.getElementById('register-btn').addEventListener('click', function () {
+            window.location.href = '/register page/register.html';
+        });
+        
         const form = document.getElementById('login');
 
         form.addEventListener('submit', async function (e) {
@@ -45,6 +51,9 @@
             e.preventDefault();
             // Create payload as new FormData object:
             const payload = new FormData(form);
+            if (payload.get('rollNumber').trim() == "" || payload.get('password').trim() == "") {
+                alert("Blank values not allowed");
+            }
             // Post the payload using Fetch:
             const response = await fetch('http://localhost:8080/authenticate', {
                 method: 'POST',
