@@ -1,3 +1,7 @@
+if(localStorage.getItem('startTime')==null){
+    document.getElementById('endRideButton').hidden = true;
+}
+
 const myHeaders = new Headers();
 myHeaders.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 const currentUser = localStorage.getItem('currentUser');
@@ -40,6 +44,8 @@ function startRide() {
     let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
     localStorage.setItem('startTime', cTime);
     window.alert('Ride Started at time: ' + cTime);
+    document.getElementById('endRideButton').hidden = false;
+    document.getElementById('startRideButton').hidden = true;
 }
 
 function endRide() {
@@ -74,4 +80,14 @@ function endRide() {
     saveTrip(url);
     window.alert('Ride ended at: ' + cTime);
     window.location.href = '/payment page/2.html';
+}
+
+function logOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('bike_id');
+    localStorage.removeItem('startTime');
+    localStorage.removeItem('endTime');
+    localStorage.removeItem('tripId');
+    window.location.href = '/index.html';
 }

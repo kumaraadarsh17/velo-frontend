@@ -20,3 +20,13 @@ const myHeaders = new Headers();
 myHeaders.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 getDuration(url);
 getPrice(url2);
+
+function logOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('bike_id');
+    localStorage.removeItem('startTime');
+    localStorage.removeItem('endTime');
+    localStorage.removeItem('tripId');
+    window.location.href = '/index.html';
+}

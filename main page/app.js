@@ -1,3 +1,7 @@
+if(localStorage.getItem('token')==null){
+    document.getElementById('map').hidden = true;
+}
+
 const myHeaders = new Headers();
 myHeaders.append('Authorization', 'Bearer '+localStorage.getItem('token'));
 
@@ -63,9 +67,12 @@ function createBar(data) {
 }
 
 document.getElementById('logout').addEventListener('click', function(){
-    console.log('button');
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('bike_id');
+    localStorage.removeItem('startTime');
+    localStorage.removeItem('endTime');
+    localStorage.removeItem('tripId');
     window.location.href = '/index.html';
 });
 

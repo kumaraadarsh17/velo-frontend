@@ -4,7 +4,17 @@ const form = document.getElementById('formRegister');
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
     const formData = new FormData(form);
-    const register = "http://localhost:8080/user/register";
+    if (formData.get('rollNumber').trim() == "" || formData.get('password').trim() == "" || formData.get('firstName').trim() == "" || formData.get('lastName').trim() == "" || formData.get('hostelName').trim() == "" || formData.get('phoneNumber').trim() == "") {
+        alert("Blank values not allowed");
+    }
+    else if(formData.get('rollNumber').length!=9){
+        alert("Invalid roll Number");
+    }
+    else if(formData.get('phoneNumber').length!=10){
+        alert('Invalid Phone number');
+    }
+    else {
+        const register = "http://localhost:8080/user/register";
 
     const response = await fetch(register, {
         method: "POST",
@@ -24,5 +34,9 @@ form.addEventListener("submit", async function (e) {
     });
     const data = response.json();
     console.log(response.status);
-    window.location.href = '/index.html';
+    if(response.status=='201'){
+        window.location.href = '/index.html';
+    }
+    }
+    
 });
